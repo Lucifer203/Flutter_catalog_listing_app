@@ -45,7 +45,8 @@ class CatalogItem extends StatelessWidget {
       child: Container(
         height: 100.0,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
             Hero(
@@ -62,7 +63,7 @@ class CatalogItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontFamily: GoogleFonts.poppins().fontFamily,
                       fontSize: 12,
-                      color: MyTheme.darkBlueColor),
+                      color: Theme.of(context).accentColor),
                 ),
                 Text(
                   catalog.desc,
@@ -79,14 +80,14 @@ class CatalogItem extends StatelessWidget {
                       "\$${catalog.price}",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: MyTheme.darkBlueColor),
+                          color: Theme.of(context).accentColor),
                     ),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Icon(Icons.shop),
+                      child: Text("Buy"),
                       style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(MyTheme.darkBlueColor),
+                          backgroundColor: MaterialStateProperty.all(
+                              Theme.of(context).buttonColor),
                           shape: MaterialStateProperty.all(StadiumBorder())),
                     )
                   ],

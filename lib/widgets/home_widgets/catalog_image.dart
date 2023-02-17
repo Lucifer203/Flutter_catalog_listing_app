@@ -13,7 +13,8 @@ class CatalogImage extends StatelessWidget {
       child: Container(
         child: Image.network(image),
         decoration: BoxDecoration(
-            color: MyTheme.creamColor, borderRadius: BorderRadius.circular(12)),
+            color: Theme.of(context).canvasColor,
+            borderRadius: BorderRadius.circular(12)),
         // color: MyTheme.creamColor,
         padding: EdgeInsets.all(12),
         width: MediaQuery.of(context).size.width / 3.8,

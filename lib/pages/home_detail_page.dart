@@ -13,10 +13,12 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      backgroundColor: MyTheme.creamColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+      ),
+      backgroundColor: Theme.of(context).canvasColor,
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).cardColor,
         child: ButtonBar(
           alignment: MainAxisAlignment.spaceBetween,
           buttonPadding: EdgeInsets.fromLTRB(0, 0, 30, 0),
@@ -25,16 +27,17 @@ class HomeDetailPage extends StatelessWidget {
               "\$${catalog.price}",
               textScaleFactor: 1.35,
               style: TextStyle(
-                  fontWeight: FontWeight.bold, color: MyTheme.darkBlueColor),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).accentColor),
             ),
             Container(
               width: 100,
               child: ElevatedButton(
                 onPressed: () {},
-                child: Icon(Icons.shop),
+                child: Text("Buy"),
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(MyTheme.darkBlueColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).buttonColor),
                     shape: MaterialStateProperty.all(StadiumBorder())),
               ),
             )
@@ -51,7 +54,7 @@ class HomeDetailPage extends StatelessWidget {
                   tag: Key(catalog.id.toString()),
                   child: Image.network(
                     catalog.image,
-                    height: 230,
+                    height: 200,
                   )),
             ),
             Expanded(
@@ -60,12 +63,12 @@ class HomeDetailPage extends StatelessWidget {
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).cardColor,
                 ),
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 75),
+                      padding: const EdgeInsets.only(top: 50),
                       child: Text(
                         catalog.name,
                         textScaleFactor: 1.8,
@@ -73,7 +76,7 @@ class HomeDetailPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontFamily: GoogleFonts.poppins().fontFamily,
                             fontSize: 12,
-                            color: MyTheme.darkBlueColor),
+                            color: Theme.of(context).accentColor),
                       ),
                     ),
                     Text(
@@ -81,6 +84,14 @@ class HomeDetailPage extends StatelessWidget {
                       textScaleFactor: 1.4,
                       style:
                           TextStyle(fontWeight: FontWeight.w300, fontSize: 10),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Text(
+                          "Mobile phones and laptops are both types of electronic devices that allow users to perform various tasks, communicate with others, and access information. Mobile phones, also known as smartphones, are portable devices that can make phone calls, send text messages, take photos and videos, access the internet, and run various mobile apps. ",
+                          textScaleFactor: 1.2,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 10)),
                     ),
                   ],
                 ),
@@ -102,7 +113,7 @@ class BackClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
-    path.quadraticBezierTo(size.width * 0.49, size.height * 0.37, 0, 0);
+    path.quadraticBezierTo(size.width * 0.5, size.height * 0.17, 0, 0);
     //path.quadraticBezierTo(size.width * 0.5, size.height - 150, 0, 0);
     return path;
   }

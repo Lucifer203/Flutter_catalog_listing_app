@@ -15,7 +15,7 @@ class CatalogHeader extends StatelessWidget {
           style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: MyTheme.darkBlueColor),
+              color: Theme.of(context).accentColor),
         ),
         Text(
           "Trending products",
@@ -25,5 +25,3 @@ class CatalogHeader extends StatelessWidget {
     );
   }
 }
-
-
