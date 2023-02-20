@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     String name = "Codepur";
 
     return MaterialApp(
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       theme: MyTheme.lightTheme(context),
       debugShowCheckedModeBanner: false,
       darkTheme: MyTheme.darkTheme(context),
