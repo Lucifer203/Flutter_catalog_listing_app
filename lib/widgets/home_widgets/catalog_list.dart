@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_cataloge/models/cart.dart';
 import 'package:flutter_cataloge/pages/home_detail_page.dart';
 import 'package:flutter_cataloge/widgets/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,14 +83,7 @@ class CatalogItem extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).accentColor),
                     ),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text("Buy"),
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).buttonColor),
-                          shape: MaterialStateProperty.all(StadiumBorder())),
-                    )
+                    _AddToCart(catalog: catalog)
                   ],
                 )
               ],
@@ -98,6 +92,39 @@ class CatalogItem extends StatelessWidget {
         ),
       ),
       // ),
+    );
+  }
+}
+
+class _AddToCart extends StatefulWidget {
+  final Item catalog;
+  const _AddToCart({
+    super.key,
+    required this.catalog,
+  });
+
+  @override
+  State<_AddToCart> createState() => _AddToCartState();
+}
+
+class _AddToCartState extends State<_AddToCart> {
+  bool isAdded = false;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        isAdded = true;
+        final _catalog = CatalogeModel();
+        final _cart = CartModel();
+        _cart.catalog = _catalog;
+        _cart.add(widget.catalog);
+        setState(() {});
+      },
+      child: isAdded ? Icon(Icons.done) : Text("Add to Cart"),
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(Theme.of(context).buttonColor),
+          shape: MaterialStateProperty.all(StadiumBorder())),
     );
   }
 }
