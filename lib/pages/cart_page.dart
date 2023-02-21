@@ -86,13 +86,25 @@ class __CartListState extends State<_CartList> {
   final _cart = CartModel();
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: _cart.items.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.done),
-        trailing: IconButton(onPressed: () {}, icon: Icon(Icons.remove_circle)),
-        title: Text(_cart.items[index].name),
-      ),
-    );
+    return _cart.items.isEmpty
+        ? Center(
+            child: Text(
+              "Nothing to show",
+              textScaleFactor: 1.7,
+            ),
+          )
+        : ListView.builder(
+            itemCount: _cart.items.length,
+            itemBuilder: (context, index) => ListTile(
+              leading: Icon(Icons.done),
+              trailing: IconButton(
+                  onPressed: () {
+                    _cart.remove(_cart.items[index]);
+                    setState(() {});
+                  },
+                  icon: Icon(Icons.remove_circle)),
+              title: Text(_cart.items[index].name),
+            ),
+          );
   }
 }

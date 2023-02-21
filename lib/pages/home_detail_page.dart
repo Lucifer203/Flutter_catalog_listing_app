@@ -3,6 +3,7 @@ import 'package:flutter_cataloge/widgets/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../models/catalog.dart';
+import '../widgets/home_widgets/add_to_cart.dart';
 
 class HomeDetailPage extends StatelessWidget {
   final Item catalog;
@@ -30,16 +31,8 @@ class HomeDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   color: Theme.of(context).accentColor),
             ),
-            Container(
-              width: 100,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text("Buy"),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).buttonColor),
-                    shape: MaterialStateProperty.all(StadiumBorder())),
-              ),
+            AddToCart(
+              catalog: catalog,
             )
           ],
         ),
