@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_cataloge/core/store.dart';
+import 'package:flutter_cataloge/models/cart.dart';
 import 'dart:convert';
 import 'package:flutter_cataloge/models/catalog.dart';
 import 'package:flutter_cataloge/utils/routes.dart';
 import 'package:flutter_cataloge/widgets/item_widget.dart';
 import 'package:flutter_cataloge/widgets/themes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:http/http.dart' as http;
 
 import '../widgets/drawer.dart';
 import '../widgets/home_widgets/catalog_header.dart';
@@ -21,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   final int days = 30;
 
   final String name = "Codepur";
+  final String url = "";
 
   @override
   void initState() {
@@ -43,13 +48,24 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final _cart = (VxState.store as MyStore).cart;
     return Scaffold(
         backgroundColor: Theme.of(context).canvasColor,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => Navigator.pushNamed(context, MyRoutes.cartRoute),
-          child: Icon(CupertinoIcons.cart, color: Colors.white),
-          backgroundColor: Theme.of(context).buttonColor,
-        ),
+        floatingActionButton: VxBuilder(
+            mutations: {AddMutation, RemoveMutation},
+            builder: (context, store, status) {
+              return FloatingActionButton(
+                onPressed: () =>
+                    Navigator.pushNamed(context, MyRoutes.cartRoute),
+                child: Icon(CupertinoIcons.cart, color: Colors.white),
+                backgroundColor: Theme.of(context).buttonColor,
+              ).badge(
+                  color: Vx.red500,
+                  size: 21,
+                  count: _cart.items.length,
+                  textStyle: TextStyle(
+                      fontSize: 12, color: Theme.of(context).canvasColor));
+            }),
         body: SafeArea(
             child: Container(
           padding: EdgeInsets.all(32),
