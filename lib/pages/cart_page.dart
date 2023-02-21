@@ -43,10 +43,15 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            "\$${_cart.totalPrice}",
-            style:
-                TextStyle(fontSize: 25, color: Theme.of(context).buttonColor),
+          VxBuilder(
+            mutations: {RemoveMutation},
+            builder: (context, store, status) {
+              return Text(
+                "\$${_cart.totalPrice}",
+                style: TextStyle(
+                    fontSize: 25, color: Theme.of(context).buttonColor),
+              );
+            },
           ),
 
           // TextButton(
@@ -81,6 +86,7 @@ class _CartTotal extends StatelessWidget {
 class _CartList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    VxState.watch(context, on: [RemoveMutation]);
     final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty
         ? Center(
@@ -95,8 +101,7 @@ class _CartList extends StatelessWidget {
               leading: Icon(Icons.done),
               trailing: IconButton(
                   onPressed: () {
-                    _cart.remove(_cart.items[index]);
-                    // setState(() {});
+                    RemoveMutation(_cart.items[index]);
                   },
                   icon: Icon(Icons.remove_circle)),
               title: Text(_cart.items[index].name),
