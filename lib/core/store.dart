@@ -5,6 +5,7 @@ import 'package:velocity_x/velocity_x.dart';
 class MyStore extends VxStore {
   late CatalogeModel catalog;
   late CartModel cart;
+  
   MyStore() {
     catalog = CatalogeModel();
     cart = CartModel();
