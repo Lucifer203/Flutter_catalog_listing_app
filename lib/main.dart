@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_cataloge/core/store.dart';
 import 'package:flutter_cataloge/pages/cart_page.dart';
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
     String name = "Codepur";
 
     return MaterialApp(
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.system,
       theme: MyTheme.lightTheme(context),
       debugShowCheckedModeBanner: false,
       darkTheme: MyTheme.darkTheme(context),
